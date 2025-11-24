@@ -1,0 +1,79 @@
+# ===========================
+# Global
+# ===========================
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Env Files
+.env
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
+
+# Node modules (both frontend and backend)
+node_modules/
+
+# ===========================
+# Vue (frontend-simple-users)
+# ===========================
+
+dist/
+.cache/
+temp/
+*.local
+
+# Vite files
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# ===========================
+# Express Backend
+# ===========================
+
+# Build / runtime files
+coverage/
+*.pid
+*.seed
+*.pid.lock
+
+# PM2 logs
+pids
+*.pid
+*.seed
+*.log
+pids/
+logs/
+
+# Output
+dist/
+build/
+
+# ===========================
+# OS / Editor Files
+# ===========================
+
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# IDEs
+.idea/
+*.iml
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
