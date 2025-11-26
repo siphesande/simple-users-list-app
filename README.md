@@ -50,27 +50,10 @@ simple-users-list-app/
 ```bash
 git clone https://github.com/siphesande/simple-users-list-app.git
 cd simple-users-list-app
+docker-compose up --build
 ```
 
 ### Backend Setup (Express.js)
-
-**Navigate to backend:**
-
-```bash
-cd simple-users-list-backend
-```
-
-**Install dependencies:**
-
-```bash
-npm install
-```
-
-**Start the backend:**
-
-```bash
-npm start
-```
 
 The backend runs at: **http://localhost:3000**
 
@@ -85,34 +68,16 @@ routes/users.js
 **Switch this line:**
 
 ```javascript
-const UserRepo = require("../repo/InMemoryUserRepo");
+const UserRepo = require("./repo/InMemoryUserRepo");
 ```
 
 **To:**
 
 ```javascript
-const UserRepo = require("../repo/MongoUserRepo");
+const UserRepo = require("./repo/MongoUserRepo");
 ```
 
-### Frontend Setup (Vue.js)
 
-**Navigate to frontend:**
-
-```bash
-cd ../frontend-simple-users
-```
-
-**Install dependencies:**
-
-```bash
-npm install
-```
-
-**Start the dev server:**
-
-```bash
-npm run dev
-```
 
 The frontend runs at: **http://localhost:5173**
 

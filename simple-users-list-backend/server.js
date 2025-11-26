@@ -3,7 +3,7 @@ const cors = require('cors');
 const bodyParser = require("body-parser");
 
 //const UserRepo = require("./repo/InMemoryUserRepo");
-const UserRepo = require("../repo/MongoUserRepo");
+const UserRepo = require("./repo/MongoUserRepo");
 const userRoutes = require("./routes/userRoutes");
 
 const app = express();

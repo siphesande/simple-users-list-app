@@ -16,57 +16,88 @@
         placeholder="Email"
         required
       />
-
+      
       <button type="submit">Add User</button>
     </form>
 
-    <ul class="user-list">
-    
-    <li v-if="users.length === 0" class="user-item" style="justify-content: center; color: #888;">
-      No users added yet
-    </li>
+    <p v-if="errorMessage" class="error-msg">
+      {{ errorMessage }}
+    </p>
 
-    <li v-for="user in users" :key="user.id" class="user-item">
-      <span>{{ user.name }} ({{ user.email }})</span>
-      <button @click="deleteUser(user.id)" class="delete-btn">Delete</button>
-    </li>
-  </ul>
+    <ul class="user-list">
+      <li v-if="users.length === 0" class="user-item" style="justify-content: center; color: #888;">
+        No users added yet
+      </li>
+
+      <li v-for="user in users" :key="user._id || user.id" class="user-item">
+        <span>{{ user.name }} ({{ user.email }})</span>
+        <button @click="deleteUser(user._id || user.id)" class="delete-btn">Delete</button>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
+const API_URL = "http://localhost:3000/users";
+
 export default {
   data() {
     return {
       users: [],
       name: "",
       email: "",
+      errorMessage: "",
     };
   },
 
   methods: {
     async fetchUsers() {
-      const res = await fetch("http://localhost:3000/users");
-      this.users = await res.json();
+      try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+
+        if (Array.isArray(data)) {
+            this.users = data;
+        } else if (data && Array.isArray(data.data)) {
+            this.users = data.data;
+        } else {
+            this.users = [];
+        }
+      } catch (e) {
+        console.error("Error fetching users", e);
+      }
     },
 
     async addUser() {
-      await fetch("http://localhost:3000/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: this.name,
-          email: this.email,
-        }),
-      });
+      // Clear previous errors
+      this.errorMessage = "";
 
-      this.name = "";
-      this.email = "";
-      this.fetchUsers();
+      try {
+        const res = await fetch(API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: this.name,
+            email: this.email,
+          }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          this.errorMessage = data.error || "Failed to add user";
+          return;
+        }
+        this.name = "";
+        this.email = "";
+        this.fetchUsers();
+      } catch (error) {
+        this.errorMessage = "Network error. Is the backend running?";
+      }
     },
 
     async deleteUser(id) {
-      await fetch(`http://localhost:3000/users/${id}`, {
+      await fetch(`${API_URL}/${id}`, {
         method: "DELETE",
       });
 
@@ -142,6 +173,16 @@ h1 {
   border: none;
   cursor: pointer;
 }
-</style>
 
-Do not not change the code but only container div to be on the center
+
+.error-msg {
+  color: #e53e3e;
+  background-color: #fff5f5;
+  border: 1px solid #feb2b2;
+  padding: 10px;
+  border-radius: 4px;
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 0.9em;
+}
+</style>

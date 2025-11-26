@@ -1,8 +1,9 @@
 // db/mongo.js
 const { MongoClient } = require("mongodb");
 
-// TODO ADD MongoDB Atlas URI
-const uri = "mongodb://127.0.0.1:27017"; 
+
+const uri = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/simpleUsersDB";
+ 
 const client = new MongoClient(uri);
 
 let db;
