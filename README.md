@@ -45,6 +45,8 @@ simple-users-list-app/
 
 ## Installation & Setup
 
+Make sure you Docker running in your computer
+
 ### Clone the Repository
 
 ```bash
@@ -57,21 +59,7 @@ docker-compose up --build
 
 The backend runs at: **http://localhost:3000**
 
-#### Optional: Use MongoDB Instead of In-Memory Storage
-
-If you added **MongoUserRepo.js**, open:
-
-```
-routes/users.js
-```
-
-**Switch this line:**
-
-```javascript
-const UserRepo = require("./repo/InMemoryUserRepo");
-```
-
-**To:**
+The above line can be changed to support any data storage I want.
 
 ```javascript
 const UserRepo = require("./repo/MongoUserRepo");
