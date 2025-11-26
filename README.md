@@ -1,6 +1,3 @@
-Readme · MD
-Copy
-
 # simple-users-list-app
 
 A full-stack demo application consisting of:
@@ -97,3 +94,14 @@ Creates a new user.
 ### DELETE /users/:id
 
 Deletes a user by **ID**.
+
+Docker Desktop
+![docker-desktop](https://github.com/siphesande/simple-users-list-app/blob/main/Screenshot%202025-11-26%20at%2007.20.15.png?raw=true)
+
+Client
+![front-end](https://github.com/siphesande/simple-users-list-app/blob/main/Screenshot%202025-11-26%20at%2007.20.00.png?raw=true)
+
+Back-end
+![back-end](https://github.com/siphesande/simple-users-list-app/blob/main/Screenshot%202025-11-26%20at%2007.20.59.png?raw=true)
+
+
